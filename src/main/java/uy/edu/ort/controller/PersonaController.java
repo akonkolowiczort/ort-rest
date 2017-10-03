@@ -1,17 +1,20 @@
 package uy.edu.ort.controller;
 
-import com.sun.istack.internal.NotNull;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import com.sun.istack.internal.NotNull;
+
+import uy.edu.ort.aop.ExecutionLog;
 import uy.edu.ort.dto.*;
 import uy.edu.ort.exceptions.PersonaNotFoundException;
 import uy.edu.ort.service.PersonaService;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("personas")
@@ -23,6 +26,7 @@ class PersonaController {
     private PersonaService service;
 
     @RequestMapping(method = RequestMethod.GET)
+    @ExecutionLog
     public List<PersonaDTO> obtenerTodas(@RequestHeader("X-Auth-User") @NotNull String user) {
         LOGGER.info("User: " + user);
         return service.obtenerPersonas();
@@ -30,9 +34,8 @@ class PersonaController {
 
     @RequestMapping(value = "/formats", method = RequestMethod.GET)
     public PersonasXMLDTO obtenerTodasMultipleFormat() {
-        return new PersonasXMLDTO(service.obtenerPersonas()
-                .stream().map(p -> new PersonaXMLDTO(p.getId(), p.getNombre(), p.getApellido()))
-                .collect(Collectors.toList()));
+        return new PersonasXMLDTO(service.obtenerPersonas().stream()
+                .map(p -> new PersonaXMLDTO(p.getId(), p.getNombre(), p.getApellido())).collect(Collectors.toList()));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -48,7 +51,7 @@ class PersonaController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void actualizar(@PathVariable( "id" ) Long id, @RequestBody GuardarPersonaDTO persona) {
+    public void actualizar(@PathVariable("id") Long id, @RequestBody GuardarPersonaDTO persona) {
         service.actualizarPersona(id, persona);
     }
 
@@ -58,14 +61,13 @@ class PersonaController {
         service.borrarPersona(id);
     }
 
-
     @ExceptionHandler(PersonaNotFoundException.class)
-    public ErrorDTO handlePersonaNotFoundException(PersonaNotFoundException ex){
+    public ErrorDTO handlePersonaNotFoundException(PersonaNotFoundException ex) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
-    public ErrorDTO handleException(Exception ex){
+    public ErrorDTO handleException(Exception ex) {
         return new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
     }
 

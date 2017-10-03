@@ -10,7 +10,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.framework.version>4.3.10.RELEASE</spring.framework.version>
+        <spring.framework.version>4.3.11.RELEASE</spring.framework.version>
         <jetty.version>9.2.9.v20150224</jetty.version>
         <logback.version>1.1.1</logback.version>
         <jcloverslf4j.version>1.7.6</jcloverslf4j.version>
@@ -53,31 +53,31 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>1.6.11</version>
+            <version>1.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.6.11</version>
+            <version>1.8.0</version>
         </dependency>
 
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.6.Final</version>
+            <version>5.2.9.Final</version>
         </dependency>
-
-        <!-- DB -->
+        <!-- Mysql Connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
+            <version>5.1.44</version>
         </dependency>
+        <!-- c3p0 connection pool -->
         <dependency>
-            <groupId>c3p0</groupId>
+            <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
-            <version>0.9.1.2</version>
+            <version>0.9.5.2</version>
         </dependency>
 
         <!-- LogBack dependencies -->
