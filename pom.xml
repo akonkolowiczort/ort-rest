@@ -61,6 +61,13 @@
             <version>1.8.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0</version>
+        </dependency>
+
+
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>

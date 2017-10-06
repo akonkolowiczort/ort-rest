@@ -3,6 +3,7 @@ package uy.edu.ort.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import uy.edu.ort.dto.GuardarPersonaDTO;
 import uy.edu.ort.dto.PersonaDTO;
@@ -44,7 +45,9 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
+    @Cacheable("persons")
     public List<PersonaDTO> obtenerPersonas() {
+        LOGGER.info("Executing obtenerPersonas method...");
         return new ArrayList<>(personas.values());
     }
 

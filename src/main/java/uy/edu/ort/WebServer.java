@@ -42,7 +42,7 @@ public class WebServer {
         ServletHolder dispatcherServletHolder = new ServletHolder(dispatcherServlet);
         contextHandler.addServlet(dispatcherServletHolder, "/");
 
-        // agregar el application context de spring a la aplicacion web
+        // agregar el application context de spring MapTimeoutCacheManager la aplicacion web
         ContextLoaderListener contextLoaderListener = new ContextLoaderListener(applicationContext);
         contextHandler.addEventListener(contextLoaderListener);
 
