@@ -9,7 +9,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import uy.edu.ort.service.PersonaServiceImpl;
 
 @Aspect
 @Component
@@ -37,6 +36,10 @@ public class MyAspect {
             result = pjp.proceed();
             long time = System.currentTimeMillis() - init;
             LOGGER.info("Execution time => {} msecs", time);
+
+        }catch (RuntimeException re){
+            LOGGER.error("Error in around aspect, rethrowing", re);
+            throw re;
         } catch (Throwable ex) {
             LOGGER.error("Error in around aspect ", ex);
             // manejar el error
