@@ -1,8 +1,9 @@
 package uy.edu.ort.dto;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class PersonaDTO {
+public class PersonaDTO implements Serializable {
 
     private long id;
 
@@ -42,5 +43,14 @@ public class PersonaDTO {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "{ " +
+                "\"id\": " + id + "," +
+                "\"nombre\": " + nombre + "," +
+                "\"apellido\": " + apellido +
+                " }";
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @EnableAspectJAutoProxy
 @EnableScheduling
-@Import(CacheContext.class)
+@Import({CacheContext.class, DBConfig.class, MessagingConfig.class})
 @ComponentScan("uy.edu.ort")
 public class WebContext {
 
